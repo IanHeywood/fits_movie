@@ -3,7 +3,7 @@ from astropy.io import fits
 import os
 import sys
 import glob
-import 00_config as cfg
+import config as cfg
 
 
 def get_map_date(infits):
