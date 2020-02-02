@@ -12,7 +12,7 @@ dy = 0.17
 
 # executable for Montage mSubimage tool
 mSubimage_exec = 'mSubimage'
-# executable for Montage mSubimage tool
+# executable for Montage mViewer tool
 mViewer_exec = 'mViewer'
 # executable for ImageMagick convert-im6
 convert_exec = 'convert-im6'
