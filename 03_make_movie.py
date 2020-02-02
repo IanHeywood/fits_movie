@@ -46,7 +46,7 @@ def main():
 
 		os.system(syscall)
 
-		syscall = 'convert-im6 '+oppng+' -gravity south '
+		syscall = 'convert-im6 '+oppng+' -gravity south -pointsize 36 '
 		syscall += "-stroke '#000C' -strokewidth 2 "
 		syscall += '-annotate 0 '+date+' '
 		syscall += '-stroke none -fill white '
