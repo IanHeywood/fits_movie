@@ -62,21 +62,21 @@ def main():
 
 		os.system(syscall)
 
-		syscall = 'convert-im6 '
-		syscall += '-loop 0 '
-		syscall += '-delay '+str(cfg.delay)+' '
-		syscall += opfolder+'*conv.png '
-		syscall += final_gif
+	syscall = 'convert-im6 '
+	syscall += '-loop 0 '
+	syscall += '-delay '+str(cfg.delay)+' '
+	syscall += opfolder+'*conv.png '
+	syscall += final_gif
 
-		os.system(syscall)
+	os.system(syscall)
 
-		syscall = 'convert-im6 '
-		syscall += '-loop 0 '
-		syscall += '-delay '+str(cfg.delay)+' '
-		syscall += opfolder+'*conv_stamp.png '
-		syscall += final_gif_labels
+	syscall = 'convert-im6 '
+	syscall += '-loop 0 '
+	syscall += '-delay '+str(cfg.delay)+' '
+	syscall += opfolder+'*conv_stamp.png '
+	syscall += final_gif_labels
 
-		os.system(syscall)
+	os.system(syscall)
 
 if __name__ == "__main__":
 
