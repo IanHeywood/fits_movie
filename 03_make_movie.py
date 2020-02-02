@@ -41,3 +41,9 @@ def main():
 
 		os.system(syscall)
 
+
+
+
+if __name__ == "__main__":
+
+    main()
