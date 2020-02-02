@@ -26,6 +26,8 @@ def main():
 
 	fitslist = sorted(glob.glob(opfolder.rstrip('/')+'/*conv.fits'))
 
+	print opfolder
+	print fitslist
 
 	for infits in fitslist:
 		oppng = infits.replace('.fits','.png')
