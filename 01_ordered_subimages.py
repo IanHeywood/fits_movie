@@ -6,12 +6,14 @@ import glob
 import config as cfg
 
 
-def get_map_date(infits):
+def get_map_info(infits):
 	input_hdu = fits.open(infits)[0]
 	hdr = input_hdu.header
-	return hdr.get('DATE-OBS')
-
-
+	map_date = hdr.get('DATE-OBS')
+	bmaj = hdr.get('BMAJ')*3600.0
+	bmin = hdr.get('BMIN')*3600.0
+	bpa = hdr.get('BPA')
+	return map_date,bmaj,bmin,bpa
 
 
 def main():
@@ -26,28 +28,29 @@ def main():
 	oplabel = cfg.oplabel
 	mSubimage_exec = cfg.mSubimage_exec
 
-
-	# ra0 = 255.705666666667
-	# dec0 = -48.7896666666667
-	# dx = 0.3
-	# dy = 0.17
-	# infolder = '/home/tremou/fits_files/'
-	# opfolder = 'subims'
-	# oplabel = 'GX339-4'
-	# mSubimage_exec = 'mSubimage'
-
-
 	CWD = os.getcwd()
 	opfolder = CWD+'/'+opfolder.rstrip('/')+'/'
+
+
 	if not os.path.isdir(opfolder):
 		os.mkdir(opfolder)
+
 
 	fitslist = glob.glob(infolder.rstrip('/')+'/*fits')
 
 
+	bmajs = []
+	bmins = []
+	bpas = []
+
+
 	for infits in fitslist:
 
-		map_date = get_map_date(infits)
+		map_date,bmaj,bmin,bpa = get_map_date(infits)
+
+		bmajs.append(bmaj)
+		bmins.append(bmin)
+		bpas.append(bpa)
 
 		if map_date:
 
@@ -70,6 +73,18 @@ def main():
 				syscall += str(dx)+' '+str(dy)
 
 				os.system(syscall)
+
+	bmajs = numpy.array(bmajs)
+	bmins = numpy.array(bmins)
+	bpas = numpy.array(bpas)
+
+
+	print('')
+	print('Restoring beam properties from input images:')
+	print('')
+	print('Median / std major axis [asec]: ',numpy.median(bpas),numpy.std(bpas))
+	print('Median / std minor axis [asec]: ',numpy.median(bpas),numpy.std(bpas))
+	print('Median / std PA [deg]         : ',numpy.median(bpas),numpy.std(bpas))
 
 
 if __name__ == "__main__":
