@@ -61,8 +61,7 @@ def main():
 				syscall += str(dx)+' '+str(dy)
 
 
-				print syscall
-#				os.system(syscall)
+				os.system(syscall)
 
 
 if __name__ == "__main__":
