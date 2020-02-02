@@ -19,6 +19,7 @@ def main():
 	maxpix = cfg.maxpix
 	cmap = cfg.cmap
 	fontsize = cfg.fontsize
+	delay = cfg.delay
 
 
 	CWD = os.getcwd()
@@ -32,8 +33,12 @@ def main():
 
 	for infits in fitslist:
 
-		oppng = infits.replace('.fits','.png')
-		oppng_label = infits.replace('.fits','_stamp.png')
+		oppng = infits.replace('conv.fits','conv.png')
+		oppng_label = infits.replace('conv.fits','conv_stamp.png')
+
+		final_gif = oplabel+'_anim.gif'
+		final_gif_labels = oplabel+'_dated_anim.gif'
+
 		mjd = infits.split('_')[-2].split('.')[0].replace('p','.')
 		t = Time(float(mjd), format='mjd', scale='utc')
 		date = t.iso.split(' ')[0]
@@ -57,6 +62,21 @@ def main():
 
 		os.system(syscall)
 
+		syscall = 'convert-im6 '
+		syscall += '-loop 0 '
+		syscall += '-delay '+str(cfg.delay)+' '
+		syscall += opfolder+'*conv.png '
+		syscall += final_gif
+
+		os.system(syscall)
+
+		syscall = 'convert-im6 '
+		syscall += '-loop 0 '
+		syscall += '-delay '+str(cfg.delay)+' '
+		syscall += opfolder+'*conv_stamp.png '
+		syscall += final_gif_labels
+
+		os.system(syscall)
 
 if __name__ == "__main__":
 
