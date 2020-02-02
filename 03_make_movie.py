@@ -33,7 +33,7 @@ def main():
 
 		oppng = infits.replace('.fits','.png')
 		oppng_label = infits.replace('.fits','_stamp.png')
-		mjd = infits.split('_')[-1].split('.')[0].replace('p','.')
+		mjd = infits.split('_')[-2].split('.')[0].replace('p','.')
 		t = Time(float(mjd), format='mjd', scale='utc')
 		date = t.iso.split(' ')[0]
 
