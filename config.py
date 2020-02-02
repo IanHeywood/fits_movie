@@ -37,3 +37,7 @@ minpix = -1e-4
 maxpix = 1e-3
 # colour map (see http://montage.ipac.caltech.edu/mViewer/mViewer_grayscale.html)
 cmap = 1
+# font size for date labels
+fontsize = 24
+# frame delay 
+delay = 10
