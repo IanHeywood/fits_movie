@@ -25,9 +25,9 @@ oplabel = 'GX339-4'
 opfolder = 'subims'
 
 # major axis for common convolution (value-unit string)
-conv_bmaj = '8.0arcsec'
+conv_bmaj = '10.0arcsec'
 # minor axis for common convolution (value-unit string)
-conv_bmin = '8.0arcsec'
+conv_bmin = '10.0arcsec'
 # position angle for common convolution (value-unit string)
 conv_bpa = '0.0deg'
 
@@ -39,5 +39,5 @@ maxpix = 1e-3
 cmap = 1
 # font size for date labels
 fontsize = 24
-# frame delay 
+# frame delay for GIFs 
 delay = 10
