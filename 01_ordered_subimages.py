@@ -3,6 +3,7 @@ from astropy.io import fits
 import os
 import sys
 import glob
+import 00_config as cfg
 
 
 def get_map_date(infits):
@@ -16,16 +17,25 @@ def get_map_date(infits):
 def main():
 
 
-	ra0 = 255.705666666667
-	dec0 = -48.7896666666667
-	dx = 0.3
-	dy = 0.17
-	infolder = '/home/tremou/fits_files/'
-	opfolder = 'subims'
-	oplabel = 'GX339-4'
-	mSubimage_exec = 'mSubimage'
+	ra0 = cfg.ra0
+	dec0 = cfg.dec0	
+	dx = cfg.dx
+	dy = cfg.dy
+	infolder = cfg.infolder
+	opfolder = cfg.opfolder
+	oplabel = cfg.oplabel
+	mSubimage_exec = cfg.mSubimage_exec
 
-	print opfolder
+
+	# ra0 = 255.705666666667
+	# dec0 = -48.7896666666667
+	# dx = 0.3
+	# dy = 0.17
+	# infolder = '/home/tremou/fits_files/'
+	# opfolder = 'subims'
+	# oplabel = 'GX339-4'
+	# mSubimage_exec = 'mSubimage'
+
 
 	CWD = os.getcwd()
 	opfolder = CWD+'/'+opfolder.rstrip('/')+'/'
@@ -34,7 +44,6 @@ def main():
 
 	fitslist = glob.glob(infolder.rstrip('/')+'/*fits')
 
-	print fitslist
 
 	for infits in fitslist:
 
@@ -59,7 +68,6 @@ def main():
 				syscall += opfolder+opfits+' '
 				syscall += str(ra0)+' '+str(dec0)+' '
 				syscall += str(dx)+' '+str(dy)
-
 
 				os.system(syscall)
 
