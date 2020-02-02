@@ -25,5 +25,5 @@ for infits in fitslist:
 	ia.open(infits)
 	ia.convolve2d(outfile=opimg,major=conv_bmaj,minor=conv_bmin,pa=conv_bpa)
 	exportfits(imagename=opimg,fitsimage=opfits)
-	os.system('rm -r '+opimg)
+	os.system('rm -rf '+opimg)
 	ia.done()
