@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# ian.heywood@physics.ox.ac.uk
+
+
 import config as cfg
 import glob
 import numpy
@@ -83,8 +87,8 @@ def main():
 	print('')
 	print('Restoring beam properties from input images:')
 	print('')
-	print('Median / std major axis [asec]: ',numpy.median(bpas),numpy.std(bpas))
-	print('Median / std minor axis [asec]: ',numpy.median(bpas),numpy.std(bpas))
+	print('Median / std major axis [asec]: ',numpy.median(bmajs),numpy.std(bmajs))
+	print('Median / std minor axis [asec]: ',numpy.median(bmins),numpy.std(bmins))
 	print('Median / std PA [deg]         : ',numpy.median(bpas),numpy.std(bpas))
 
 
