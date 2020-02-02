@@ -46,7 +46,7 @@ def main():
 
 	for infits in fitslist:
 
-		map_date,bmaj,bmin,bpa = get_map_date(infits)
+		map_date,bmaj,bmin,bpa = get_map_info(infits)
 
 		bmajs.append(bmaj)
 		bmins.append(bmin)
