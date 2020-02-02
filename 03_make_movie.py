@@ -18,6 +18,7 @@ def main():
 	minpix = cfg.minpix
 	maxpix = cfg.maxpix
 	cmap = cfg.cmap
+	fontsize = cfg.fontsize
 
 
 	CWD = os.getcwd()
@@ -46,7 +47,8 @@ def main():
 
 		os.system(syscall)
 
-		syscall = 'convert-im6 '+oppng+' -gravity south -pointsize 36 '
+		syscall = 'convert-im6 '+oppng+' '
+		syscall += '-gravity south -pointsize '+str(fontsize)+' '
 		syscall += "-stroke '#000C' -strokewidth 2 "
 		syscall += '-annotate 0 '+date+' '
 		syscall += '-stroke none -fill white '
