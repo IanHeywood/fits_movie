@@ -46,7 +46,7 @@ def main():
 
 		os.system(syscall)
 
-		syscall = 'convert-im6 '+oppng+' '
+		syscall = 'convert-im6 '+oppng+' -gravity south '
 		syscall += "-stroke '#000C' -strokewidth 2 "
 		syscall += '-annotate 0 '+date+' '
 		syscall += '-stroke none -fill white '
@@ -54,7 +54,6 @@ def main():
 		syscall += oppng_label
 
 		os.system(syscall)
-
 
 
 if __name__ == "__main__":
