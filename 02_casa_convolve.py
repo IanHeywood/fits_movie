@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # ian.heywood@physics.ox.ac.uk
 
 
@@ -9,13 +8,6 @@ import sys
 
 
 execfile('config.py')
-
-
-# opfolder = cfg.opfolder
-# oplabel = cfg.oplabel
-# conv_bmaj = cfg.conv_bmaj
-# conv_bmin = cfg.conv_bmin
-# conv_bpa = cfg.conv_bpa
 
 
 CWD = os.getcwd()
@@ -34,3 +26,4 @@ for infits in fitslist:
 	ia.convolve2d(outfile=opimg,major=conv_bmaj,minor=conv_bmin,pa=conv_bpa)
 	exportfits(imagename=opimg,fitsimage=opfits)
 	os.system('rm -r '+opimg)
+	ia.done()
