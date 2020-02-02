@@ -14,6 +14,8 @@ dy = 0.17
 mSubimage_exec = 'mSubimage'
 # executable for Montage mSubimage tool
 mViewer_exec = 'mViewer'
+# executable for ImageMagick convert-im6
+convert_exec = 'convert-im6'
 
 # folder containing source FITS files
 infolder = '/home/tremou/fits_files/'
@@ -28,4 +30,10 @@ conv_bmaj = '8.0arcsec'
 conv_bmin = '8.0arcsec'
 # position angle for common convolution (value-unit string)
 conv_bpa = '0.0deg'
-# 
+
+# pixel minimum for frames
+minpix = -1e-4
+# pixel minimum for frames
+maxpix = 1e-3
+# colour map (see http://montage.ipac.caltech.edu/mViewer/mViewer_grayscale.html)
+cmap = 1
