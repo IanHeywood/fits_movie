@@ -1,9 +1,10 @@
-from astropy.time import Time
-from astropy.io import fits
+import config as cfg
+import glob
+import numpy
 import os
 import sys
-import glob
-import config as cfg
+from astropy.time import Time
+from astropy.io import fits
 
 
 def get_map_info(infits):
