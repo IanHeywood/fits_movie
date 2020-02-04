@@ -48,7 +48,10 @@ def main():
 	bmins = []
 	bpas = []
 
-
+	
+	framecount = 0
+	
+	
 	for infits in fitslist:
 
 		map_date,bmaj,bmin,bpa = get_map_info(infits)
@@ -59,6 +62,8 @@ def main():
 
 		if map_date:
 
+			framecount += 1
+			
 			t = Time(map_date, format='isot', scale='utc')
 			tmjd = str(t.mjd).replace('.','p')
 			opfits = oplabel+'_'+tmjd+'.fits'
@@ -87,9 +92,12 @@ def main():
 	print('')
 	print('Restoring beam properties from input images:')
 	print('')
-	print('Median / std major axis [asec]: ',numpy.median(bmajs),numpy.std(bmajs))
-	print('Median / std minor axis [asec]: ',numpy.median(bmins),numpy.std(bmins))
-	print('Median / std PA [deg]         : ',numpy.median(bpas),numpy.std(bpas))
+	print('Median / std major axis [asec]: '+str(numpy.median(bmajs))+','+str(numpy.std(bmajs)))
+	print('Median / std minor axis [asec]: '+str(numpy.median(bmins))+','+str(numpy.std(bmins)))
+	print('Median / std PA [deg]         : '+str(numpy.median(bpas))+','+str(numpy.std(bpas)))
+	print('')
+	print(str(len(fitslist))+' input images')
+	print(str(framecount)+' subimage created')
 
 
 if __name__ == "__main__":
