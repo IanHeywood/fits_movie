@@ -97,7 +97,7 @@ def main():
 	print('Median / std PA [deg]         : '+str(numpy.median(bpas))+','+str(numpy.std(bpas)))
 	print('')
 	print(str(len(fitslist))+' input images')
-	print(str(framecount)+' subimage created')
+	print(str(framecount)+' subimages created')
 
 
 if __name__ == "__main__":
