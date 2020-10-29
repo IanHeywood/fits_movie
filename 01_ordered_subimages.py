@@ -68,11 +68,11 @@ def main():
 			tmjd = str(t.mjd).replace('.','p')
 			opfits = oplabel+'_'+tmjd+'.fits'
 
-			print opfolder+opfits
+			print(opfolder+opfits)
 
 			if os.path.isfile(opfolder+opfits):
 
-				print opfits+'exists, skipping'
+				print(opfits+'exists, skipping')
 
 			else:
 
