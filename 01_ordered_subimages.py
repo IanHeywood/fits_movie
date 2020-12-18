@@ -12,92 +12,87 @@ from astropy.io import fits
 
 
 def get_map_info(infits):
-	input_hdu = fits.open(infits)[0]
-	hdr = input_hdu.header
-	map_date = hdr.get('DATE-OBS')
-	bmaj = hdr.get('BMAJ')*3600.0
-	bmin = hdr.get('BMIN')*3600.0
-	bpa = hdr.get('BPA')
-	return map_date,bmaj,bmin,bpa
+    input_hdu = fits.open(infits)[0]
+    hdr = input_hdu.header
+    map_date = hdr.get('DATE-OBS')
+    bmaj = hdr.get('BMAJ')*3600.0
+    bmin = hdr.get('BMIN')*3600.0
+    bpa = hdr.get('BPA')
+    return map_date,bmaj,bmin,bpa
 
 
 def main():
 
+    ra0 = cfg.ra0
+    dec0 = cfg.dec0 
+    dx = cfg.dx
+    dy = cfg.dy
+    infolder = cfg.infolder
+    opfolder = cfg.opfolder
+    oplabel = cfg.oplabel
+    mSubimage_exec = cfg.mSubimage_exec
 
-	ra0 = cfg.ra0
-	dec0 = cfg.dec0	
-	dx = cfg.dx
-	dy = cfg.dy
-	infolder = cfg.infolder
-	opfolder = cfg.opfolder
-	oplabel = cfg.oplabel
-	mSubimage_exec = cfg.mSubimage_exec
-
-	CWD = os.getcwd()
-	opfolder = CWD+'/'+opfolder.rstrip('/')+'/'
-
-
-	if not os.path.isdir(opfolder):
-		os.mkdir(opfolder)
+    CWD = os.getcwd()
+    opfolder = CWD+'/'+opfolder.rstrip('/')+'/'
 
 
-	fitslist = glob.glob(infolder.rstrip('/')+'/*fits')
+    if not os.path.isdir(opfolder):
+        os.mkdir(opfolder)
 
 
-	bmajs = []
-	bmins = []
-	bpas = []
+    fitslist = glob.glob(infolder.rstrip('/')+'/*fits')
 
-	
-	framecount = 0
-	
-	
-	for infits in fitslist:
+    bmajs = []
+    bmins = []
+    bpas = []
 
-		map_date,bmaj,bmin,bpa = get_map_info(infits)
+    counter = 0
 
-		bmajs.append(bmaj)
-		bmins.append(bmin)
-		bpas.append(bpa)
+    for infits in fitslist:
 
-		if map_date:
+        map_date,bmaj,bmin,bpa = get_map_info(infits)
 
-			framecount += 1
-			
-			t = Time(map_date, format='isot', scale='utc')
-			tmjd = str(t.mjd).replace('.','p')
-			opfits = oplabel+'_'+tmjd+'.fits'
+        bmajs.append(bmaj)
+        bmins.append(bmin)
+        bpas.append(bpa)
 
-			print(opfolder+opfits)
+        if map_date:
 
-			if os.path.isfile(opfolder+opfits):
+            t = Time(map_date, format='isot', scale='utc')
+            tmjd = str(t.mjd).replace('.','p')
 
-				print(opfits+'exists, skipping')
+            counter_label = str(counter).rjust(6,'0')
+            opfits = oplabel+'_'+counter_label+'_'+tmjd+'.fits'
 
-			else:
+            print opfolder+opfits
 
-				syscall = mSubimage_exec+' '
-				syscall += infits+' '
-				syscall += opfolder+opfits+' '
-				syscall += str(ra0)+' '+str(dec0)+' '
-				syscall += str(dx)+' '+str(dy)
+            if os.path.isfile(opfolder+opfits):
 
-				os.system(syscall)
+                print opfits+'exists, skipping'
 
-	bmajs = numpy.array(bmajs)
-	bmins = numpy.array(bmins)
-	bpas = numpy.array(bpas)
+            else:
+
+                syscall = mSubimage_exec+' '
+                syscall += infits+' '
+                syscall += opfolder+opfits+' '
+                syscall += str(ra0)+' '+str(dec0)+' '
+                syscall += str(dx)+' '+str(dy)
+
+                os.system(syscall)
+
+        counter += 1
+
+    bmajs = numpy.array(bmajs)
+    bmins = numpy.array(bmins)
+    bpas = numpy.array(bpas)
 
 
-	print('')
-	print('Restoring beam properties from input images:')
-	print('')
-	print('Median / std major axis [asec]: '+str(numpy.median(bmajs))+','+str(numpy.std(bmajs)))
-	print('Median / std minor axis [asec]: '+str(numpy.median(bmins))+','+str(numpy.std(bmins)))
-	print('Median / std PA [deg]         : '+str(numpy.median(bpas))+','+str(numpy.std(bpas)))
-	print('')
-	print(str(len(fitslist))+' input images')
-	print(str(framecount)+' subimages created')
+    print('')
+    print('Restoring beam properties from input images:')
+    print('')
+    print('Median / std major axis [asec]: ',numpy.median(bmajs),numpy.std(bmajs))
+    print('Median / std minor axis [asec]: ',numpy.median(bmins),numpy.std(bmins))
+    print('Median / std PA [deg]         : ',numpy.median(bpas),numpy.std(bpas))
 
 
 if __name__ == "__main__":
